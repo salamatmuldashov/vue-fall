@@ -1,14 +1,9 @@
-<script setup>
-import ListView from './views/ListView'
-
-
-</script>
-
 <template>
-
-  <main>
-    <ListView></ListView>
-  </main>
-
-
+  <div id="app">
+    <RouterView />
+  </div>
 </template>
+
+<script setup></script>
+
+<style></style>
