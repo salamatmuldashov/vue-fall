@@ -7,7 +7,7 @@
 dist
 
 # Node dependencies
-node_modules
+.node_modules
 
 # Logs
 logs
@@ -17,8 +17,10 @@ logs
 .DS_Store
 .fleet
 .idea
+.vscode
 
 # Local env files
 .env
 .env.*
 !.env.example
+.public
