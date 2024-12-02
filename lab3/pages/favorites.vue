@@ -24,6 +24,7 @@ const currentUser = useState("currentUser");
 const people = useState("people");
 const favUsers = ref(null);
 
+
 const fetchFavoriteUsers = () => {
   favUsers.value = people.value.filter((person) =>
     currentUser.value.favorites.includes(person.id)
@@ -56,6 +57,8 @@ const updateRating = (id) => {
   background: linear-gradient(180deg, #76c5e7 0%, #fbf3f3 100%);
   height: 100vh;
   padding-top: 3.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 .fav-page-title {
   display: flex;

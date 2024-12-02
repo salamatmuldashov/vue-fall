@@ -22,12 +22,7 @@
                 fill="gold"
               />
             </svg>
-            <img
-              src="../assets/rating.png"
-              alt=""
-              v-else-if="getStarType(n) === 'half'"
-              style="width: 17px; height: 16px"
-            />
+
             <svg
               v-else-if="getStarType(n) === 'hybrid'"
               width="17"
@@ -37,14 +32,14 @@
               xmlns="http://www.w3.org/2000/svg"
             >
               <defs>
-                <clipPath id="half">
-                  <rect x="0" y="0" :width="hybridStar()" height="16" />
+                <clipPath :id="`half-${id}-${n}`">
+                  <rect x="0" y="0" :width="hybridStar" height="16" />
                 </clipPath>
               </defs>
               <path
                 d="M8.5 0L10.4084 5.87336L16.584 5.87336L11.5878 9.50329L13.4962 15.3766L8.5 11.7467L3.50383 15.3766L5.41219 9.50329L0.416019 5.87336L6.59163 5.87336L8.5 0Z"
                 fill="gold"
-                clip-path="url(#half)"
+                :clip-path="`url(#half-${id}-${n})`"
               />
             </svg>
 
@@ -76,10 +71,11 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits, computed} from "vue";
 import { format, differenceInCalendarDays } from "date-fns";
 
 const props = defineProps({
+  id: Number,
   name: String,
   rating: Number,
   date: String,
@@ -94,8 +90,6 @@ const getStarType = (index) => {
   const decimalPart = props.rating % 1;
   if (index <= wholePart) {
     return "full";
-  } else if (index == wholePart + 1 && decimalPart == 0.5) {
-    return "half";
   } else if (index === wholePart + 1 && decimalPart < 1 && decimalPart > 0) {
     return "hybrid";
   } else {
@@ -103,11 +97,10 @@ const getStarType = (index) => {
   }
 };
 
-const hybridStar = () => {
+const hybridStar = computed(() => {
   const x = props.rating % 1;
-
   return x * 17;
-};
+});
 
 const displayFormattedDate = (dateString) => {
   const date = dateString.split("T")[0];
@@ -126,7 +119,7 @@ const displayFormattedDate = (dateString) => {
 };
 
 const likeClicked = () => {
-  emit("update-rating", props.rating + 0.5);
+  emit("update-rating");
 };
 </script>
 

@@ -12,7 +12,10 @@
         </div>
       </div>
       <div class="person-card-avatar">
-        <NuxtLink to="/user/:id">
+        <NuxtLink v-if="currentUser.id !== id" :to="`/user/${id}`">
+          <NuxtImg :src="avatar" />
+        </NuxtLink>
+        <NuxtLink v-else to="/profile">
           <NuxtImg :src="avatar" />
         </NuxtLink>
       </div>
@@ -29,6 +32,8 @@
 
 <script setup>
 import { format, differenceInCalendarDays } from "date-fns";
+
+const currentUser = useState("currentUser");
 
 const props = defineProps({
   id: Number,

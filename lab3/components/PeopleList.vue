@@ -37,6 +37,10 @@ const props = defineProps({
   selectedTopic: String,
 });
 
+watch(() => props.selectedTopic, () => {
+  currentPage.value = 1;
+});
+
 const people = useState("people");
 
 const filteredPeople = computed(() => {

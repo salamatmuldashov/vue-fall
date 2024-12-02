@@ -14,6 +14,7 @@
     <PersonCard
       v-for="person in paginatedPeople"
       :key="person.id"
+      :id="person.id"
       :name="person.name"
       :rating="person.rating"
       :date="person.date"
@@ -29,7 +30,7 @@ import TopicName from "../components/TopicName.vue";
 import DateTime from "../components/DateTime.vue";
 import Sort from "@/components/Sort.vue";
 import Arrow from "@/components/Arrow.vue";
-import { ref, defineProps, computed } from "vue";
+import { ref, defineProps, computed, onMounted } from "vue";
 import PersonCard from "./PersonCard.vue";
 import _ from "lodash";
 
@@ -224,6 +225,10 @@ const people = ref([
   },
 ]);
 
+onMounted(() => {
+  console.log(filteredPeople.value);
+});
+
 const filteredPeople = computed(() => {
   return people.value.filter((person) => person.topic === props.selectedTopic);
 });
@@ -269,16 +274,18 @@ const sortDate = () => {
 };
 
 const findTotalPages = computed(() => {
+  console.log(filteredPeople.value.length / 4);
+  
   return Math.ceil(filteredPeople.value.length / 4);
 });
 
 const updateRating = (id) => {
-  people.value.find((person) => person.id === id).rating += 0.5;
+  const person = people.value.find((person) => person.id === id);
+  if (person) {
+    person.rating = Math.min(5, Math.round((person.rating + 0.1) * 10) / 10);
+  }
 };
 </script>
-
-
-
 
 <style scoped>
 .table-header {

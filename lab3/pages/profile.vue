@@ -1,37 +1,101 @@
 <script setup>
 const currentUser = useState("currentUser");
-const age = ref(32);
+const age = ref(25);
 const isEditing = ref(false);
 const people = useState("people");
+const currentPage = ref(1)
+
+
+const posts = ref([
+  {
+    isDelete: true,
+    id: currentUser.id,
+    name: currentUser.name,
+    rating: currentUser.rating,
+    date: currentUser.date,
+    comment: currentUser.comment,
+    avatar: currentUser.avatar
+
+
+  },
+  {
+    isDelete: true,
+    id: currentUser.id,
+    name: currentUser.name,
+    rating: currentUser.rating,
+    date: currentUser.date,
+    comment: currentUser.comment,
+    avatar: currentUser.avatar
+
+
+  },
+  {
+    isDelete: true,
+    id: currentUser.id,
+    name: currentUser.name,
+    rating: currentUser.rating,
+    date: currentUser.date,
+    comment: currentUser.comment,
+    avatar: currentUser.avatar
+
+
+  },
+  {
+    isDelete: true,
+    id: currentUser.id,
+    name: currentUser.name,
+    rating: currentUser.rating,
+    date: currentUser.date,
+    comment: "asdasd",
+    avatar: currentUser.avatar
+  },
+])
+
+
 const switchEdit = () => {
   isEditing.value = !isEditing.value;
 };
 
+
+
 const fetchCurrentUser = () => {
   const storedUser = JSON.parse(localStorage.getItem("currentUser"));
   if (storedUser) {
-    currentUser.value = people.value.find(person => person.id === storedUser.id);
+    currentUser.value = people.value.find(
+      (person) => person.id === storedUser.id
+    );
   }
 };
 
 onBeforeMount(() => {
   if (!localStorage.getItem("currentUser")) {
     navigateTo("/login");
-    return; 
+    return;
   }
 });
 
 onMounted(() => {
   fetchCurrentUser();
 });
+
+const saveButtonClicked = () => {
+  window.alert("Age saved successfully!");
+};
+
+
+const paginatedPosts = computed(() => {
+  const start = (currentPage.value - 1) * 2;
+  return posts.value.slice(start, start + 2);
+});
+
 </script>
 
 <template>
-  <Header  />
+  <Header />
   <div class="profile-page" v-if="currentUser">
     <div class="my-profile">My Profile</div>
 
-    <div class="profile-header" >
+    <div class="profile-header">
       <div class="profile-header-img">
         <img :src="currentUser.avatar" alt="avatar" />
       </div>
@@ -62,24 +126,28 @@ onMounted(() => {
       </div>
       <div class="profile-header-actions">
         <button type="button" class="statistics-button">Statistics</button>
-        <button type="button" class="save-button">SAVE</button>
+        <button type="button" @click="saveButtonClicked" class="save-button">
+          SAVE
+        </button>
       </div>
     </div>
     <div class="latest-posts-title">Latest Posts</div>
     <div class="profile-body">
+      <!-- <PersonCard
+      v-for="person in paginatedPeople"
+      :key="person.id"
+      :id="person.id"
+      :name="person.name"
+      :rating="person.rating"
+      :date="person.date"
+      :comment="person.comment"
+      :avatar="person.avatar"
+      @update-rating="updateRating(person.id)"
+      
+    /> -->
       <PersonCard
+      v-for="post in paginatedPosts"
         :isDelete="true"
-        :id="currentUser.id"
-        :name="currentUser.name"
-        :rating="currentUser.rating"
-        :date="currentUser.date"
-        :comment="currentUser.comment"
-        :avatar="currentUser.avatar"
-        style="width: 520px; padding: 1rem; margin-top: 2rem"
-      />
-      <PersonCard
-        :isDelete="true"
-        :key="currentUser.id"
         :id="currentUser.id"
         :name="currentUser.name"
         :rating="currentUser.rating"
@@ -89,6 +157,7 @@ onMounted(() => {
         style="width: 520px; padding: 1rem; margin-top: 2rem"
       />
     </div>
+    <!-- <PostPages :leng="posts.length" :currentPage="currentPage"/> -->
   </div>
 </template>
 

@@ -1,20 +1,16 @@
 {
-  "name": "nuxt-app",
-  "private": true,
-  "type": "module",
+  "name": "lab3",
+  "version": "1.0.0",
   "scripts": {
-    "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "build": "nuxt build",
+    "start": "nuxt start"
   },
   "dependencies": {
     "@nuxt/image": "^1.8.1",
     "@vueuse/core": "^11.1.0",
     "date-fns": "^4.1.0",
-    "nuxt": "^3.13.0",
-    "vue": "latest",
-    "vue-router": "latest"
+    "lodash": "^4.17.21",
+    "nuxt": "^3.13.2"
   }
 }

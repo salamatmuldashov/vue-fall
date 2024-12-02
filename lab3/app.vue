@@ -10,7 +10,7 @@ const people = useState('people', () => ([
     rating: 0.7,
     comment: "This is awesome adventure that I had! Thanks!",
     topic: "Adventure",
-    favorites: [3, 4, 7, 10],    
+    favorites: [3],    
   },
   {
     id: 2,
