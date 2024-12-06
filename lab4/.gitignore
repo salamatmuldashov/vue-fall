@@ -24,3 +24,8 @@ logs
 .env.*
 !.env.example
 .public
+
+Dockerfile
+README.Docker.md
+.dockerignore
+compose.yaml
