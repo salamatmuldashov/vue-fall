@@ -16,7 +16,6 @@
 
       <div class="statistics-title">Statistic</div>
     </div>
-    <div>{{ data }}</div>
     <div class="statistic-page-body">
       <DatePicker
         v-model="dateRange"
@@ -38,7 +37,7 @@ const currentUser = useState("currentUser");
 import { Chart, registerables } from "chart.js";
 import DatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
-import { da } from "date-fns/locale";
+
 
 Chart.register(...registerables);
 

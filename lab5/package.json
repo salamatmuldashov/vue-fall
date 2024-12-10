@@ -1,0 +1,19 @@
+{
+  "name": "lab3",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "nuxt dev --host 0.0.0.0 --port 3000",
+    "build": "nuxt build",
+    "start": "nuxt start"
+  },
+  "dependencies": {
+    "@nuxt/image": "^1.8.1",
+    "@vuepic/vue-datepicker": "^10.0.0",
+    "@vueuse/core": "^11.1.0",
+    "chart.js": "^4.4.6",
+    "date-fns": "^4.1.0",
+    "firebase": "^11.0.2",
+    "lodash": "^4.17.21",
+    "nuxt": "^3.13.2"
+  }
+}

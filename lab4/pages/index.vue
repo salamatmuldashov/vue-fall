@@ -5,9 +5,14 @@ const { selectedTopic, chooseTopic } = useTopic();
 const currentPage = ref(1);
 const ratingOrder = ref(null);
 const dateOrder = ref(null);
-const people = useState("people");
+const people = ref(null);
 
 onBeforeMount(() => {
+  if (!JSON.parse(localStorage.getItem('people'))) {
+    people.value = initialPeople.value
+  } else {
+    people.value = JSON.parse(localStorage.getItem("people"));
+  }
   if (!localStorage.getItem("currentUser")) {
     navigateTo("/login");
     return;
